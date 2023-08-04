@@ -13,7 +13,7 @@ function getWeatherData(cityName, apiKey, callback) {
   function handleResponse(response) {
     let weatherData = {
       cityName: cityName,
-      temperature: response.data.main.temp,
+      temperature: Math.round(response.data.main.temp),
       wind: response.data.wind.speed,
       precipitation: response.data.rain
         ? response.data.rain["1h"] || "0mm"
@@ -43,7 +43,7 @@ function getWeatherData(cityName, apiKey, callback) {
 
 function updateWeatherUI(weatherData) {
   cityNameElement.textContent = weatherData.cityName;
-  temperatureElement.textContent = `${weatherData.temperature}°C`;
+  temperatureElement.textContent = `${Math.round(weatherData.temperature)}°C`;
   windElement.textContent = `${weatherData.wind} km/h`;
   weatherDescriptionElement.textContent = weatherData.description;
   precipitationElement.textContent = weatherData.precipitation;
